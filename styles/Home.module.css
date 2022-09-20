@@ -5,8 +5,22 @@
 }
 
 .homeContainer__sec1 {
+  padding: 20px;
   flex: 1;
-  background-color: red;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.homeContainer__sec1>h3 {
+  font-size: 2em;
+  font-weight: 800;
+}
+
+.homeContainer__sec1>img {
+  width: 400px;
+  height: 400px;
 }
 
 .homeContainer__sec2 {
