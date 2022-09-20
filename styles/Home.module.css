@@ -14,8 +14,9 @@
 }
 
 .homeContainer__sec1>h3 {
+  margin-top: 10px;
   font-size: 2em;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .homeContainer__sec1>img {

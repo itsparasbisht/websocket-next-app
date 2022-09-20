@@ -7,6 +7,7 @@ import styles from "../styles/Home.module.css";
 const ariaLabel = { "aria-label": "description" };
 export default function Home() {
   const [avatar, setAvatar] = useState(null);
+  const avatarText = Math.random() * 1000;
 
   useEffect(() => {
     getAnAvatar();
@@ -15,7 +16,7 @@ export default function Home() {
   async function getAnAvatar() {
     try {
       const data = await fetch(
-        "https://avatars.dicebear.com/api/micah/dsgt.svg?background=%23ffffff",
+        `https://avatars.dicebear.com/api/micah/${avatarText}.svg?background=%23ffffff`,
         {
           method: "GET",
         }
