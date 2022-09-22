@@ -25,7 +25,9 @@ function chatPage() {
           </div>
         ))}
       </div>
-      <div className={styles.chatContainer__sendMessage}></div>
+      <div className={styles.chatContainer__sendMessage}>
+        <input type="text" />
+      </div>
     </div>
   );
 }
