@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../styles/ChatPage.module.css";
 import SendIcon from "@mui/icons-material/Send";
 
@@ -6,12 +6,31 @@ const avatarSrc =
   "https://avatars.dicebear.com/api/micah/309.84552351888595.svg?background=%23ffffff";
 const username = "kisen67";
 
+let ws = null;
+
 function ChatPage() {
   const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   const [message, setMessage] = useState("");
+  const [chats, setChats] = useState([]);
 
-  function handleSendMessage() {}
+  function connectToSocket() {
+    ws = new WebSocket("ws://localhost:8000/ws");
+    ws.onopen = () => ws.send("connected");
+    ws.onmessage = (e) => {
+      const data = JSON.parse(e.data);
+      console.log(data);
+    };
+  }
+
+  useEffect(() => {
+    connectToSocket();
+  }, []);
+
+  function handleSendMessage() {
+    const data = JSON.stringify({ username, message });
+    ws.send(data);
+  }
 
   return (
     <div className={styles.chatContainer}>
