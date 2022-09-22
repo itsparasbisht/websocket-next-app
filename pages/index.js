@@ -36,7 +36,7 @@ export default function Home() {
   const handleSubmit = () => {
     sessionStorage.setItem("avatar", avatar);
     sessionStorage.setItem("username", username);
-    router.push("/chatPage");
+    router.push("/ChatPage");
   };
 
   return (
