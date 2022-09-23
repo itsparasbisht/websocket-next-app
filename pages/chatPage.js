@@ -14,11 +14,13 @@ function ChatPage() {
   const avatarSrc = sessionStorage.getItem("avatar");
 
   function connectToSocket() {
-    ws = new WebSocket("ws://localhost:8000/ws");
-    ws.onopen = () => ws.send("connected");
+    ws = new WebSocket(`ws://localhost:8000/ws/${username}`);
+    // ws.onopen = () => ws.send("connected");
     ws.onmessage = (e) => {
-      const data = JSON.parse(e.data);
-      setChats((prev) => [...prev, data]);
+      // const data = JSON.parse(e.data);
+      // console.log(data);
+      console.log(e.data);
+      // setChats((prev) => [...prev, data]);
     };
   }
 
@@ -35,20 +37,21 @@ function ChatPage() {
   return (
     <div className={styles.chatContainer}>
       <div className={styles.chatContainer__chats}>
-        {chats.map((chat, i) => (
-          <div
-            key={i}
-            className={`${styles.chatContainer__chat} ${
-              chat.username == username && styles.myMessages
-            }`}
-          >
-            <img src={chat.avatarSrc} alt={`Hi, my self ${username}`} />
-            <div>
-              <b>{chat.username}</b>
-              <p>{chat.message}</p>
+        {chats.length > 0 &&
+          chats.map((chat, i) => (
+            <div
+              key={i}
+              className={`${styles.chatContainer__chat} ${
+                chat.username == username && styles.myMessages
+              }`}
+            >
+              <img src={chat.avatarSrc} alt={`Hi, my self ${username}`} />
+              <div>
+                <b>{chat.username}</b>
+                <p>{chat.message}</p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
       <div className={styles.chatContainer__sendMessage}>
         <input

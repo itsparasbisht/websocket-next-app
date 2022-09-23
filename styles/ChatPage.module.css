@@ -7,7 +7,7 @@
     width: 100%;
     height: 85%;
     background-color: rgb(255, 255, 255);
-    overflow: auto;
+    overflow-y: scroll;
 }
 
 .chatContainer__sendMessage {
@@ -65,10 +65,17 @@
 }
 
 .myMessages {
-    /* display: block;
-    float: right; */
+    width: 98.5vw;
+    max-width: 100vw !important;
+    justify-content: flex-end;
 }
 
 .myMessages>img {
     order: 1;
+    margin-right: 20px;
+}
+
+.myMessages>div {
+    margin-right: 5px;
+    margin-left: 0px;
 }
