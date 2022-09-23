@@ -2,10 +2,6 @@ import React, { useEffect, useState } from "react";
 import styles from "../styles/ChatPage.module.css";
 import SendIcon from "@mui/icons-material/Send";
 
-const avatarSrc =
-  "https://avatars.dicebear.com/api/micah/309.84552351888595.svg?background=%23ffffff";
-const username = "kisen67";
-
 let ws = null;
 
 function ChatPage() {
@@ -14,12 +10,15 @@ function ChatPage() {
   const [message, setMessage] = useState("");
   const [chats, setChats] = useState([]);
 
+  const username = sessionStorage.getItem("username");
+  const avatarSrc = sessionStorage.getItem("avatar");
+
   function connectToSocket() {
     ws = new WebSocket("ws://localhost:8000/ws");
     ws.onopen = () => ws.send("connected");
     ws.onmessage = (e) => {
       const data = JSON.parse(e.data);
-      console.log(data);
+      setChats((prev) => [...prev, data]);
     };
   }
 
@@ -28,28 +27,25 @@ function ChatPage() {
   }, []);
 
   function handleSendMessage() {
-    const data = JSON.stringify({ username, message });
+    setMessage("");
+    const data = JSON.stringify({ username, message, avatarSrc });
     ws.send(data);
   }
 
   return (
     <div className={styles.chatContainer}>
       <div className={styles.chatContainer__chats}>
-        {arr.map((item) => (
+        {chats.map((chat, i) => (
           <div
-            key={item}
+            key={i}
             className={`${styles.chatContainer__chat} ${
-              item == 2 && styles.myMessages
+              chat.username == username && styles.myMessages
             }`}
           >
-            <img src={avatarSrc} alt={`Hi, my self ${username}`} />
+            <img src={chat.avatarSrc} alt={`Hi, my self ${username}`} />
             <div>
-              <b>username</b>
-              <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque
-                eum excepturi omnis accusantium quaerat similique quisquam sint
-                incidunt veritatis voluptates.
-              </p>
+              <b>{chat.username}</b>
+              <p>{chat.message}</p>
             </div>
           </div>
         ))}

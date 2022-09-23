@@ -65,7 +65,8 @@
 }
 
 .myMessages {
-    float: right;
+    /* display: block;
+    float: right; */
 }
 
 .myMessages>img {
