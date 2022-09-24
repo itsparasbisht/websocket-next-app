@@ -16,11 +16,9 @@ function ChatPage() {
 
   function connectToSocket() {
     ws.onmessage = (e) => {
-      if (JSON.parse(e.data)) {
-        const data = JSON.parse(e.data);
-        console.log(data);
-        setChats((prev) => [...prev, data]);
-      }
+      const data = JSON.parse(e.data);
+      console.log(data);
+      setChats((prev) => [...prev, data]);
     };
   }
 
@@ -46,6 +44,8 @@ function ChatPage() {
               }`}
             >
               {chat?.left ? (
+                <p className={styles.chatLeft}>{chat.message}</p>
+              ) : chat?.joined ? (
                 <p className={styles.chatLeft}>{chat.message}</p>
               ) : (
                 <>
