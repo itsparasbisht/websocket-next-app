@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import styles from "../styles/ChatPage.module.css";
 import SendIcon from "@mui/icons-material/Send";
 
+const username = sessionStorage.getItem("username");
+const avatarSrc = sessionStorage.getItem("avatar");
+
 let ws = null;
+ws = new WebSocket(`ws://localhost:8000/ws/${username}`);
 
 function ChatPage() {
   const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -10,17 +14,13 @@ function ChatPage() {
   const [message, setMessage] = useState("");
   const [chats, setChats] = useState([]);
 
-  const username = sessionStorage.getItem("username");
-  const avatarSrc = sessionStorage.getItem("avatar");
-
   function connectToSocket() {
-    ws = new WebSocket(`ws://localhost:8000/ws/${username}`);
-    // ws.onopen = () => ws.send("connected");
     ws.onmessage = (e) => {
-      // const data = JSON.parse(e.data);
-      // console.log(data);
-      console.log(e.data);
-      // setChats((prev) => [...prev, data]);
+      if (JSON.parse(e.data)) {
+        const data = JSON.parse(e.data);
+        console.log(data);
+        setChats((prev) => [...prev, data]);
+      }
     };
   }
 
@@ -45,11 +45,17 @@ function ChatPage() {
                 chat.username == username && styles.myMessages
               }`}
             >
-              <img src={chat.avatarSrc} alt={`Hi, my self ${username}`} />
-              <div>
-                <b>{chat.username}</b>
-                <p>{chat.message}</p>
-              </div>
+              {chat?.left ? (
+                <p className={styles.chatLeft}>{chat.message}</p>
+              ) : (
+                <>
+                  <img src={chat.avatarSrc} alt={`Hi, my self ${username}`} />
+                  <div>
+                    <b>{chat.username}</b>
+                    <p>{chat.message}</p>
+                  </div>
+                </>
+              )}
             </div>
           ))}
       </div>
