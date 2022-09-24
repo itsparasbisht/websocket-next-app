@@ -6,8 +6,7 @@
 .chatContainer__chats {
     width: 100%;
     height: 85%;
-    background-color: rgb(255, 255, 255);
-    overflow-y: scroll;
+    overflow: auto;
 }
 
 .chatContainer__sendMessage {
@@ -43,12 +42,12 @@
     color: rgb(0, 0, 0);
 }
 
-.chatContainer__chat b {
+.chatContainer b {
     font-size: 17px;
     font-weight: 700;
 }
 
-.chatContainer__chat p {
+.chatContainer p {
     font-size: 17px;
 }
 
@@ -65,19 +64,29 @@
 }
 
 .myMessages {
-    width: 98.5vw;
-    max-width: 100vw !important;
+    margin-top: 10px;
+    width: 99vw;
+    display: flex;
+    align-items: center;
+    padding: 10px;
     justify-content: flex-end;
 }
 
 .myMessages>img {
     order: 1;
-    margin-right: 20px;
+    margin-right: 10px;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
 }
 
 .myMessages>div {
     margin-right: 5px;
-    margin-left: 0px;
+    max-width: 70vw;
+    background-color: rgb(225, 229, 255);
+    padding: 10px;
+    border-radius: 20px;
+    color: rgb(0, 0, 0);
 }
 
 .chatLeft {

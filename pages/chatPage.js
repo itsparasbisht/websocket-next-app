@@ -39,8 +39,10 @@ function ChatPage() {
           chats.map((chat, i) => (
             <div
               key={i}
-              className={`${styles.chatContainer__chat} ${
-                chat.username == username && styles.myMessages
+              className={`${
+                chat.username == username
+                  ? styles.myMessages
+                  : styles.chatContainer__chat
               }`}
             >
               {chat?.left ? (
