@@ -40,6 +40,8 @@ function ChatPage() {
               className={`${
                 chat.username == username
                   ? styles.myMessages
+                  : chat.info
+                  ? styles.info__chat
                   : styles.chatContainer__chat
               }`}
             >

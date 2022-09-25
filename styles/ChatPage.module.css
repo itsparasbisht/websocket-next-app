@@ -65,7 +65,7 @@
 
 .myMessages {
     margin-top: 10px;
-    width: 98.5vw;
+    width: 100%;
     display: flex;
     align-items: center;
     padding: 10px;
@@ -75,7 +75,6 @@
 
 .myMessages>img {
     order: 1;
-    margin-right: 10px;
     width: 50px;
     height: 50px;
     object-fit: cover;
@@ -90,8 +89,11 @@
     color: rgb(0, 0, 0);
 }
 
+.info__chat {
+    padding: 10px;
+}
+
 .chatLeft {
-    min-width: 97vw !important;
     text-align: center;
     font-weight: 700;
 }
