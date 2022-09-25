@@ -8,9 +8,10 @@ const id = socketId.split("-")[0];
 
 const username = sessionStorage.getItem("username") + "-" + id;
 const avatarSrc = sessionStorage.getItem("avatar");
+const apiUrl = "fastapi-chat-websocket.herokuapp.com";
 
 let ws = null;
-ws = new WebSocket(`ws://localhost:8000/ws/${username}/${socketId}`);
+ws = new WebSocket(`ws://${apiUrl}/ws/${username}/${socketId}`);
 
 function ChatPage() {
   const [message, setMessage] = useState("");
