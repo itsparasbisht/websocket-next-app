@@ -9,8 +9,6 @@ let ws = null;
 ws = new WebSocket(`ws://localhost:8000/ws/${username}`);
 
 function ChatPage() {
-  const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
   const [message, setMessage] = useState("");
   const [chats, setChats] = useState([]);
 

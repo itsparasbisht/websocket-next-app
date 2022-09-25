@@ -1,18 +1,18 @@
 .chatContainer {
     width: 100vw;
     height: 100vh;
+    max-width: 100vw;
 }
 
 .chatContainer__chats {
     width: 100%;
     height: 85%;
-    overflow: auto;
+    overflow-y: scroll;
 }
 
 .chatContainer__sendMessage {
     width: 100%;
     height: 15%;
-    /* background-color: green; */
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -65,10 +65,11 @@
 
 .myMessages {
     margin-top: 10px;
-    width: 99vw;
+    width: 98.5vw;
     display: flex;
     align-items: center;
     padding: 10px;
+    display: flex;
     justify-content: flex-end;
 }
 
@@ -90,10 +91,7 @@
 }
 
 .chatLeft {
-    min-width: 100vw;
-    width: 100vw;
-    max-width: 100vw;
-    /* background-color: red; */
+    min-width: 97vw !important;
     text-align: center;
     font-weight: 700;
 }
