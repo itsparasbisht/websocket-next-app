@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
 import styles from "../styles/ChatPage.module.css";
 import SendIcon from "@mui/icons-material/Send";
+import { v4 as uuidv4 } from "uuid";
 
-const username = sessionStorage.getItem("username");
+const socketId = uuidv4();
+const id = socketId.split("-")[0];
+
+const username = sessionStorage.getItem("username") + "-" + id;
 const avatarSrc = sessionStorage.getItem("avatar");
 
 let ws = null;
-ws = new WebSocket(`ws://localhost:8000/ws/${username}`);
+ws = new WebSocket(`ws://localhost:8000/ws/${username}/${socketId}`);
 
 function ChatPage() {
   const [message, setMessage] = useState("");
