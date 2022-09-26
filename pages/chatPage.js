@@ -17,7 +17,9 @@ if (process.isClient) {
 }
 
 let ws = null;
-ws = new WebSocket(`ws://${apiUrl}/ws/${username}/${socketId}`);
+if (process.isClient) {
+  ws = new WebSocket(`ws://${apiUrl}/ws/${username}/${socketId}`);
+}
 
 function ChatPage() {
   const [message, setMessage] = useState("");
