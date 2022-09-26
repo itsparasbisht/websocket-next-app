@@ -6,9 +6,15 @@ import { v4 as uuidv4 } from "uuid";
 const socketId = uuidv4();
 const id = socketId.split("-")[0];
 
-const username = sessionStorage.getItem("username") + "-" + id;
-const avatarSrc = sessionStorage.getItem("avatar");
-const apiUrl = "fastapi-chat-websocket.herokuapp.com";
+let username = null;
+let avatarSrc = null;
+let apiUrl = null;
+
+if (sessionStorage.getItem("username")) {
+  username = sessionStorage.getItem("username") + "-" + id;
+  avatarSrc = sessionStorage.getItem("avatar");
+  apiUrl = "fastapi-chat-websocket.herokuapp.com";
+}
 
 let ws = null;
 ws = new WebSocket(`ws://${apiUrl}/ws/${username}/${socketId}`);
