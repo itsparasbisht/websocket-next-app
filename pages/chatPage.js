@@ -10,7 +10,7 @@ let username = null;
 let avatarSrc = null;
 let apiUrl = null;
 
-if (window) {
+if (process.isClient) {
   username = sessionStorage.getItem("username") + "-" + id;
   avatarSrc = sessionStorage.getItem("avatar");
   apiUrl = "fastapi-chat-websocket.herokuapp.com";

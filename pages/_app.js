@@ -1,6 +1,6 @@
 import "../styles/globals.css";
 
-if (window) {
+if (process.isClient) {
   sessionStorage.setItem(
     "avatar",
     "https://avatars.dicebear.com/api/micah/default.svg?background=%23ffffff"
