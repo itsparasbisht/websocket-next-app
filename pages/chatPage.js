@@ -21,7 +21,7 @@ function ChatPage() {
       username = sessionStorage.getItem("username") + "-" + id;
       avatarSrc = sessionStorage.getItem("avatar");
       apiUrl = "fastapi-chat-websocket.herokuapp.com";
-      ws = new WebSocket(`ws://${apiUrl}/ws/${username}/${socketId}`);
+      ws = new WebSocket(`wss://${apiUrl}/ws/${username}/${socketId}`);
     }
     ws.onmessage = (e) => {
       const data = JSON.parse(e.data);
