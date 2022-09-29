@@ -3,29 +3,26 @@ import styles from "../styles/ChatPage.module.css";
 import SendIcon from "@mui/icons-material/Send";
 import { v4 as uuidv4 } from "uuid";
 
-const socketId = uuidv4();
-const id = socketId.split("-")[0];
-
 let username = null;
 let avatarSrc = null;
 let apiUrl = null;
 
-if (process.isClient) {
-  username = sessionStorage.getItem("username") + "-" + id;
-  avatarSrc = sessionStorage.getItem("avatar");
-  apiUrl = "fastapi-chat-websocket.herokuapp.com";
-}
-
 let ws = null;
-if (process.isClient) {
-  ws = new WebSocket(`ws://${apiUrl}/ws/${username}/${socketId}`);
-}
 
 function ChatPage() {
   const [message, setMessage] = useState("");
   const [chats, setChats] = useState([]);
 
   function connectToSocket() {
+    if (!ws) {
+      const socketId = uuidv4();
+      const id = socketId.split("-")[0];
+
+      username = sessionStorage.getItem("username") + "-" + id;
+      avatarSrc = sessionStorage.getItem("avatar");
+      apiUrl = "fastapi-chat-websocket.herokuapp.com";
+      ws = new WebSocket(`ws://${apiUrl}/ws/${username}/${socketId}`);
+    }
     ws.onmessage = (e) => {
       const data = JSON.parse(e.data);
       console.log(data);
